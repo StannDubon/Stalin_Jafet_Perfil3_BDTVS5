@@ -1,20 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import screen1 from './src/components/Screen1';
+import screen2 from './src/components/Screen2'; 
+import { FontAwesome } from '@expo/vector-icons'; 
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator initialRouteName="screen2">
+        <Tab.Screen
+          name="screen2" 
+          component={screen2} 
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <FontAwesome name="home" size={size} color="green" />
+            ),
+          }}
+        />
+        <Tab.Screen 
+          name="Comidas" 
+          component={screen1} 
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <FontAwesome name="heart" size={size} color="green" /> 
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
